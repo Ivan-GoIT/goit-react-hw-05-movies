@@ -1,7 +1,5 @@
 import axios from 'axios';
 
-
-
 const instanseAxios = axios.create({
   baseURL: 'https://api.themoviedb.org/3/',
   params: {
@@ -9,7 +7,7 @@ const instanseAxios = axios.create({
   },
 });
 
-export const fetchData =  url => {
+export const fetchData = url => {
   return instanseAxios({
     url,
   })
