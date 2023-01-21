@@ -1,16 +1,15 @@
 import { useState, useEffect, useRef } from 'react';
 import { TreadingListContext } from 'context/treadingContext';
-import { fetchData,reformatGenreData } from 'helpers';
+import { fetchData, reformatGenreData } from 'helpers';
 import { Header } from 'components/Header/Header';
 import { Home } from 'components/Pages/Home/Home';
-import { MovieCard } from 'components/Pages/Moviss/MovieCard/MovieCard';
-import QueryPath from '../../constants/QueryPath'
+import QueryPath from '../../constants/QueryPath';
+import { Movies } from 'components/Pages/Movies/Movies';
 
 export const App = () => {
   const [treadingList, setTreadingList] = useState([]);
   const [genresList, setGenresList] = useState({});
   const firstHomeRender = useRef(true);
-
 
   useEffect(() => {
     if (firstHomeRender) {
@@ -29,7 +28,7 @@ export const App = () => {
       <Header />
       <TreadingListContext.Provider value={{ treadingList, genresList }}>
         <Home treadingList={treadingList} />
-        <MovieCard movieId={76600} /> {/* {пока что номер элемента в массиве} */}
+        <Movies />
       </TreadingListContext.Provider>
     </>
   );
