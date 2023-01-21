@@ -9,7 +9,7 @@ export const Header = () => {
           <a href="/" className={classNames(css.link_reset,css.link)}>Home</a>
         </li>
         <li className={css.routes__item}>
-          <a href="/" className={classNames(css.link_reset,css.link)}>Movies</a>
+          <a href="/movies" className={classNames(css.link_reset,css.link)}>Movies</a>
         </li>
       </ul>
     </header>

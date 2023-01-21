@@ -2,9 +2,10 @@ import { useState, useEffect, useRef } from 'react';
 import { TreadingListContext } from 'context/treadingContext';
 import { fetchData, reformatGenreData } from 'helpers';
 import { Header } from 'components/Header/Header';
-import { Home } from 'components/Pages/Home/Home';
+import { HomePage } from 'pages/HomePage/HomePage';
 import QueryPath from '../../constants/QueryPath';
-import { Movies } from 'components/Pages/Movies/Movies';
+import { MoviesPage } from 'pages/MoviesPage/MoviesPage';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 export const App = () => {
   const [treadingList, setTreadingList] = useState([]);
@@ -25,11 +26,16 @@ export const App = () => {
 
   return (
     <>
-      <Header />
-      <TreadingListContext.Provider value={{ treadingList, genresList }}>
-        <Home treadingList={treadingList} />
-        <Movies />
-      </TreadingListContext.Provider>
+      <BrowserRouter>
+        <Header />
+        <TreadingListContext.Provider value={{ treadingList, genresList }}>
+          <Routes>
+          <Route path='' element={ <HomePage treadingList={treadingList} />}/>
+          <Route path='/movies' element={ <MoviesPage /> }/>
+            
+          </Routes>
+        </TreadingListContext.Provider>
+      </BrowserRouter>
     </>
   );
 };
