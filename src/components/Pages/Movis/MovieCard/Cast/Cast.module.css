@@ -1,0 +1,15 @@
+.cast_list {
+  box-shadow: 0 2px 2px #000;
+}
+
+.cast_list__item::marker {
+  color: transparent;
+}
+.cast_list__item > img {
+  width: 100px;
+}
+
+.cast_list__item > p:first-of-type {
+  display: list-item;
+  color: #000;
+}

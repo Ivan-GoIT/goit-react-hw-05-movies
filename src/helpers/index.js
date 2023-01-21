@@ -1,4 +1,4 @@
 import { fetchData } from './fetchData';
 import { reformatGenreData } from './reformatGenreData';
-
-export { fetchData, reformatGenreData };
+import { imagePath } from './imagePath';
+export { fetchData, reformatGenreData, imagePath };

@@ -11,7 +11,7 @@ export const Home = ({treadingList}) => {
             <ul className={css.home_list}>
               {treadingList.map(item => (
                 <li key={item.id} className={css.home_list__item}>
-                  <a href="/">{item.original_title}</a>
+                  <a href="/">{item.title}</a>
                 </li>
               ))}
             </ul>
