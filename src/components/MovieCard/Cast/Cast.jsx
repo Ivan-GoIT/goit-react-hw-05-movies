@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import QueryPath from 'constants/QueryPath';
 import { fetchData, imagePath } from 'helpers';
 import css from './Cast.module.css';
+import { useParams } from 'react-router-dom';
 // import defaultImg from '../../../../../assets/defaultImg'
 
 // const defaultImgPath = gender =>
@@ -9,15 +10,15 @@ import css from './Cast.module.css';
 //     ? defaultImg.femaleDefault
 //     : defaultImg.maleDefault;
 
-export const Cast = ({ movieId }) => {
+export const Cast = () => {
   const [actorsArrey, setActorsArrey] = useState([]);
+  const { movieId } = useParams();
 
   useEffect(() => {
     fetchData(QueryPath.movieCredits(movieId)).then(({ data: { cast } }) => {
       setActorsArrey(cast);
     });
   }, [movieId]);
-  console.log(actorsArrey);
   return (
     <ul className={css.cast_list}>
       {actorsArrey.map(({ profile_path, name, character, id, gender }) => (

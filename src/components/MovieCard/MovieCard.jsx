@@ -1,11 +1,12 @@
 import { Section } from 'components/Section/Section';
 import { useTreadingListContext } from 'context/treadingContext';
 import { imagePath } from 'helpers';
-import { Cast } from './Cast/Cast';
+import { Link, Outlet, useParams } from 'react-router-dom';
 import css from './MovieCard.module.css';
-import { Reviews } from './Reviews/Reviews';
-export const MovieCard = ({ movieId }) => {
+
+export const MovieCard = () => {
   const { treadingList, genresList } = useTreadingListContext();
+  const { movieId } = useParams();
   if (!treadingList.length) return;
   const {
     poster_path,
@@ -14,7 +15,7 @@ export const MovieCard = ({ movieId }) => {
     genre_ids,
     vote_average,
     release_date,
-  } = treadingList.find(({ id }) => id === movieId);
+  } = treadingList.find(({ id }) => id === Number(movieId));
 
   return (
     <Section>
@@ -46,16 +47,15 @@ export const MovieCard = ({ movieId }) => {
           <h4>Additional information</h4>
           <ul className="info_list">
             <li className="info_list__item">
-              <a href="/">Cast</a>
+              <Link to={`cast`}>Cast</Link>
             </li>
             <li className="info_list__item">
-              <a href="/">Reviews</a>
+              <Link to={`reviews`}>Reviews</Link>
             </li>
           </ul>
         </div>
-        {/* <Cast movieId={movieId}/> */}
-        <Reviews movieId={movieId}/>
-        </>
+        <Outlet/>
+      </>
     </Section>
   );
 };

@@ -2,9 +2,11 @@ import { useState, useEffect } from 'react';
 import QueryPath from 'constants/QueryPath';
 import { fetchData } from 'helpers';
 import css from './Reviews.module.css';
+import { useParams } from 'react-router-dom';
 
-export const Reviews = ({ movieId }) => {
+export const Reviews = () => {
   const [reviews, setReviews] = useState([]);
+  const{movieId}=useParams()
 
   useEffect(() => {
     fetchData(QueryPath.movieReviews(movieId)).then(({ data: { results } }) => {

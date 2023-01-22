@@ -1,15 +1,31 @@
-import classNames from 'classname'
+import classNames from 'classname';
 import css from './Header.module.css';
+import styled from 'styled-components';
+import { NavLink } from 'react-router-dom';
+
+const StyledLink = styled(NavLink)`
+  color: black;
+  &.active {
+    color: red;
+  }
+`;
 
 export const Header = () => {
   return (
     <header className={css.header}>
       <ul className={css.routes}>
         <li className={css.routes__item}>
-          <a href="/" className={classNames(css.link_reset,css.link)}>Home</a>
+          <StyledLink to="/" className={classNames(css.link_reset, css.link)}>
+            Home
+          </StyledLink>
         </li>
         <li className={css.routes__item}>
-          <a href="/movies" className={classNames(css.link_reset,css.link)}>Movies</a>
+          <StyledLink
+            to="/movies"
+            className={classNames(css.link_reset, css.link)}
+          >
+            Movies
+          </StyledLink>
         </li>
       </ul>
     </header>
