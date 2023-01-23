@@ -1,7 +1,7 @@
 const QueryPath = {
   trending: 'trending/movie/day',
   genres:'genre/movie/list',
-  search: '/search/search-movies',
+  search: '/search/movie',
   movieDetails:(movieId)=>`/movie/${movieId}`,
   movieCredits:(movieId)=>`/movie/${movieId}/credits`,
   movieReviews:(movieId)=>`/movie/${movieId}/reviews`

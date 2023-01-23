@@ -1,6 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
-import { TreadingListContext } from 'context/treadingContext';
-import { fetchData, reformatGenreData } from 'helpers';
+import { fetchData } from 'helpers';
 import { Header } from 'components/Header/Header';
 import { HomePage } from 'pages/HomePage/HomePage';
 import QueryPath from '../../constants/QueryPath';
@@ -9,41 +8,38 @@ import { MovieCard } from 'components/MovieCard/MovieCard';
 import { MoviesPage } from 'pages/MoviesPage/MoviesPage';
 import { Cast } from 'components/MovieCard/Cast/Cast';
 import { Reviews } from 'components/MovieCard/Reviews/Reviews';
+import { ToastContainer } from 'react-toastify';
 import { SearhForm } from 'components/SearchForm/SearchForm';
+import { MoviesList } from 'components/MoviesList/MoviesList';
 
+import 'react-toastify/dist/ReactToastify.css';
 export const App = () => {
-  const [treadingList, setTreadingList] = useState([]);
-  const [genresList, setGenresList] = useState({});
-  const firstHomeRender = useRef(true);
-
-  useEffect(() => {
-    if (firstHomeRender) {
-      fetchData(QueryPath.trending).then(({ data: { results } }) => {
-        setTreadingList(results);
-      });
-      fetchData(QueryPath.genres).then(({ data: { genres } }) => {
-        setGenresList(reformatGenreData(genres));
-      });
-      firstHomeRender.current = false;
-    }
-  }, []);
-
   return (
     <>
+      <ToastContainer
+        position="top-right"
+        autoClose={3000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="colored"
+      />
       <BrowserRouter>
-        <Header />
-        <TreadingListContext.Provider value={{ treadingList, genresList }}>
-          <Routes>
-            <Route path="" element={<HomePage treadingList={treadingList} />} />
-            <Route path="/movies" element={<MoviesPage />}>
-              <Route path="" element={<SearhForm />} />
+        <Routes>
+          <Route path="/" element={<Header />}>
+            <Route index element={<HomePage />} />
+            <Route path="movies" element={<MoviesPage />}>
               <Route path=":movieId" element={<MovieCard />}>
                 <Route path="cast" element={<Cast />} />
                 <Route path="reviews" element={<Reviews />} />
               </Route>
             </Route>
-          </Routes>
-        </TreadingListContext.Provider>
+          </Route>
+        </Routes>
       </BrowserRouter>
     </>
   );

@@ -1,21 +1,29 @@
+import {useState,useEffect} from 'react'
 import { Section } from 'components/Section/Section';
-import { useTreadingListContext } from 'context/treadingContext';
-import { imagePath } from 'helpers';
+import { fetchData, imagePath } from 'helpers';
 import { Link, Outlet, useParams } from 'react-router-dom';
+import QueryPath from '../../constants/QueryPath'
 import css from './MovieCard.module.css';
 
 export const MovieCard = () => {
-  const { treadingList, genresList } = useTreadingListContext();
+  const [movieObj, setMovieObj] = useState(null)
   const { movieId } = useParams();
-  if (!treadingList.length) return;
+
+  useEffect(() => {
+ fetchData(QueryPath.movieDetails(movieId)).then(({data})=>{setMovieObj(data)})
+ return setMovieObj(null)
+  }, [movieId])
+  
+
+  if (!movieObj) return;
   const {
     poster_path,
     title,
     overview,
-    genre_ids,
+    genres,
     vote_average,
     release_date,
-  } = treadingList.find(({ id }) => id === Number(movieId));
+  } = movieObj;
 
   return (
     <Section>
@@ -36,8 +44,8 @@ export const MovieCard = () => {
             <p>{overview ?? ''}</p>
             <h4>Genres</h4>
             <p>
-              {genre_ids.reduce(
-                (str, item) => str + genresList[item] + ` `,
+              {genres.reduce(
+                (str, {name}) => str + name + ` `,
                 ''
               ) ?? ''}
             </p>

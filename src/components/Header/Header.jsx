@@ -1,7 +1,7 @@
 import classNames from 'classname';
 import css from './Header.module.css';
 import styled from 'styled-components';
-import { NavLink } from 'react-router-dom';
+import { NavLink, Outlet } from 'react-router-dom';
 
 const StyledLink = styled(NavLink)`
   color: black;
@@ -11,8 +11,8 @@ const StyledLink = styled(NavLink)`
 `;
 
 export const Header = () => {
-  return (
-    <header className={css.header}>
+  return (<>
+      <header className={css.header}>
       <ul className={css.routes}>
         <li className={css.routes__item}>
           <StyledLink to="/" className={classNames(css.link_reset, css.link)}>
@@ -29,5 +29,7 @@ export const Header = () => {
         </li>
       </ul>
     </header>
+    <Outlet/>
+</>
   );
 };

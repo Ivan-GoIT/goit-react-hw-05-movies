@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { toast } from 'react-toastify';
 
 const instanseAxios = axios.create({
   baseURL: 'https://api.themoviedb.org/3/',
@@ -7,12 +8,13 @@ const instanseAxios = axios.create({
   },
 });
 
-export const fetchData = url => {
+export const fetchData = (url, query) => {
   return instanseAxios({
     url,
+    params: { query: query },
   })
     .then(({ data, status, statusText }) => ({ data, status, statusText }))
     .catch(err => {
-      console.log(err);
+      toast.error(err);
     });
 };
