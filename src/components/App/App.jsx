@@ -28,15 +28,14 @@ export const App = () => {
         pauseOnHover
         theme="colored"
       />
-      <BrowserRouter>
+      <BrowserRouter basename=".github.io/goit-react-hw-05-movies">
         <Routes>
-          <Route path="/" element={<Header />}>
+          <Route path="" element={<Header />}>
             <Route index element={<HomePage />} />
-            <Route path="movies" element={<MoviesPage />}>
-              <Route path=":movieId" element={<MovieCard />}>
-                <Route path="cast" element={<Cast />} />
-                <Route path="reviews" element={<Reviews />} />
-              </Route>
+            <Route path="movies" element={<MoviesPage />} />
+            <Route path="movies/:movieId" element={<MovieCard />}>
+              <Route path="cast" element={<Cast />} />
+              <Route path="reviews" element={<Reviews />} />
             </Route>
           </Route>
         </Routes>

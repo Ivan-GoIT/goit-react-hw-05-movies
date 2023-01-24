@@ -1,37 +1,42 @@
-import css from './SearchForm.module.css';
-import { useState } from 'react';
+import { useSearchParams } from 'react-router-dom';
+import {useState} from 'react'
 import { Section } from 'components/Section/Section';
 import { fetchData } from 'helpers';
 import QueryPath from 'constants/QueryPath';
-import { MoviesList } from 'components/MoviesList/MoviesList';
-import { useLocation, useSearchParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
+import { Loader } from 'components/Loader/Loader';
+import css from './SearchForm.module.css';
 
-export const SearhForm = () => {
-  const [queryInput, setQueryInput] = useState('');
-  const [moviesList, setMoviesList] = useState([]);
-  const [queryParams, setQueryParams] = useSearchParams('');
-  const query = queryParams.get('query');
+export const SearhForm = ({ onSubmit }) => {
+  const [isLoading, setIsLoading] = useState(false)
+  const [queryParams, setQueryParams] = useSearchParams();
+  const query = queryParams.get('query') ?? '';
 
-  const location = useLocation();
 
-  const onCangeInputHandler = evt =>
-    setQueryInput(evt.currentTarget.value.toLowerCase().trim());
+  const onCangeInputHandler = evt => {
+    const query = evt.target.value;
+    const nextQuery = query !== '' ? { query } : {};
+    setQueryParams(nextQuery);
+  };
+
   const onSubmitHandler = evt => {
     evt.preventDefault();
-
-    console.log('queryInput',queryInput.length);
-    if (!queryInput.length) {
+    setIsLoading (true);
+    if (!queryParams.get('query').length) {
       toast.warn('Enter something to search for');
       return;
     }
-
-    setQueryParams({query:queryInput})
-    fetchData(QueryPath.search, query).then(({ data: { results={} } }) => {
-      setMoviesList(results);
-    }).catch(err=>{
-      toast.error('Something wrong')
-    });
+    fetchData(QueryPath.search, query)
+      .then(({ data: { results = {} } }) => {
+        onSubmit(results);
+      })
+      .catch(err => {
+        toast.error('Something wrong');
+      })
+      .finally(() => {
+        setIsLoading(false);
+      });
+    setQueryParams({ query: '' });
   };
 
   return (
@@ -42,12 +47,12 @@ export const SearhForm = () => {
             name="search"
             type="text"
             required
-            value={queryInput}
+            value={query}
             onChange={onCangeInputHandler}
           />
           <button type="submit">Search</button>
         </form>
-        <MoviesList moviesList={moviesList} />
+        {isLoading && <Loader />}
       </>
     </Section>
   );

@@ -22,8 +22,8 @@ export const HomePage = () => {
   return (
     <>
       {!!treadingList.length && (
-        <Section>
-          <MoviesList moviesList={treadingList} title="Trending today" />
+        <Section title="Trending today">
+          <MoviesList moviesList={treadingList}/>
         </Section>
       )}
     </>
