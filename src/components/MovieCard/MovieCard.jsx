@@ -28,7 +28,7 @@ export const MovieCard = () => {
   return (
     <Section>
       <>
-        <button> Go back</button>
+        <button className={css.goBackButton}> Go back</button>
         <div className={css.movie_card}>
           <div className={css.poster}>
             <img src={imagePath(poster_path)} alt={title} />
