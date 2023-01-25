@@ -1,34 +1,43 @@
-import {useState,useEffect} from 'react'
+import { useState, useEffect } from 'react';
 import { Section } from 'components/Section/Section';
 import { fetchData, imagePath } from 'helpers';
-import { Link, Outlet, useParams } from 'react-router-dom';
-import QueryPath from '../../constants/QueryPath'
+import {
+  Link,
+  NavLink,
+  Outlet,
+  useLocation,
+  useParams,
+} from 'react-router-dom';
+import QueryPath from '../../constants/QueryPath';
 import css from './MovieCard.module.css';
 
 export const MovieCard = () => {
-  const [movieObj, setMovieObj] = useState(null)
+  const [movieObj, setMovieObj] = useState(null);
   const { movieId } = useParams();
+  const location = useLocation();
+  const backLink = location.state?.from ?? '/';
+
+  console.log('MovieCard location', location);
+  console.log('MovieCard backLink', backLink);
 
   useEffect(() => {
- fetchData(QueryPath.movieDetails(movieId)).then(({data})=>{setMovieObj(data)})
- return setMovieObj(null)
-  }, [movieId])
-  
+    fetchData(QueryPath.movieDetails(movieId)).then(({ data }) => {
+      setMovieObj(data);
+    });
+    return setMovieObj(null);
+  }, [movieId]);
 
   if (!movieObj) return;
-  const {
-    poster_path,
-    title,
-    overview,
-    genres,
-    vote_average,
-    release_date,
-  } = movieObj;
+  const { poster_path, title, overview, genres, vote_average, release_date } =
+    movieObj;
 
   return (
     <Section>
       <>
-        <button className={css.goBackButton}> Go back</button>
+        <NavLink className={css.goBackButton} to={backLink}>
+          {' '}
+          Go back
+        </NavLink>
         <div className={css.movie_card}>
           <div className={css.poster}>
             <img src={imagePath(poster_path)} alt={title} />
@@ -44,10 +53,7 @@ export const MovieCard = () => {
             <p>{overview ?? ''}</p>
             <h4>Genres</h4>
             <p>
-              {genres.reduce(
-                (str, {name}) => str + name + ` `,
-                ''
-              ) ?? ''}
+              {genres.reduce((str, { name }) => str + name + ` `, '') ?? ''}
             </p>
           </div>
         </div>
@@ -55,14 +61,18 @@ export const MovieCard = () => {
           <h4>Additional information</h4>
           <ul className="info_list">
             <li className="info_list__item">
-              <Link to={`cast`}>Cast</Link>
+              <Link to={`cast`} state={{ from: location }}>
+                Cast
+              </Link>
             </li>
             <li className="info_list__item">
-              <Link to={`reviews`}>Reviews</Link>
+              <Link to={`reviews`} state={{ from: location }}>
+                Reviews
+              </Link>
             </li>
           </ul>
         </div>
-        <Outlet/>
+        <Outlet />
       </>
     </Section>
   );

@@ -3,10 +3,13 @@ import { MoviesList } from 'components/MoviesList/MoviesList';
 import { Section } from 'components/Section/Section';
 import { fetchData, parseDataForMovieList } from 'helpers';
 import QueryPath from 'constants/QueryPath';
+import { useLocation } from 'react-router-dom';
 
 export const HomePage = () => {
   const [treadingList, setTreadingList] = useState([]);
   const firstHomeRender = useRef(true);
+  const location=useLocation();
+console.log('location',location);
 
   useEffect(() => {
     if (firstHomeRender.current) {
@@ -23,7 +26,7 @@ export const HomePage = () => {
     <>
       {!!treadingList.length && (
         <Section title="Trending today">
-          <MoviesList moviesList={treadingList}/>
+          <MoviesList moviesList={treadingList} location={location} />
         </Section>
       )}
     </>
