@@ -24,9 +24,9 @@ export const App = () => {
         pauseOnHover
         theme="colored"
       />
-      <BrowserRouter basename=".github.io/goit-react-hw-05-movies">
+      <BrowserRouter basename="/goit-react-hw-05-movies">
         <Routes>
-          <Route path="" element={<Header />}>
+          <Route path="/" element={<Header />}>
             <Route index element={<HomePage />} />
             <Route path="movies" element={<MoviesPage />} />
             <Route path="movies/:movieId" element={<MovieCard />}>
