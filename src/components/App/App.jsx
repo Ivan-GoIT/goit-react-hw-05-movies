@@ -10,7 +10,7 @@ import Loader from 'components/Loader/Loader';
 import 'react-toastify/dist/ReactToastify.css';
 
 const HomePage = lazy(() => import('pages/HomePage/HomePage'));
-const MoviesPage = lazy(() => import('components/MovieCard/MovieCard'));
+const MoviesPage = lazy(() => import('pages/MoviesPage/MoviesPage'));
 
 export const App = () => {
   return (
@@ -33,10 +33,10 @@ export const App = () => {
             <Route path="/" element={<Header />}>
               <Route index element={<HomePage />} />
               <Route path="movies" element={<MoviesPage />} />
-                {/* <Route path="movies/:movieId" element={<MovieCard />}>
-                  <Route path="cast" element={<Cast />} />
-                  <Route path="reviews" element={<Reviews />} />
-                </Route> */}
+              <Route path="movies/:movieId" element={<MovieCard />}>
+                <Route path="cast" element={<Cast />} />
+                <Route path="reviews" element={<Reviews />} />
+              </Route>
             </Route>
           </Routes>
         </Suspense>

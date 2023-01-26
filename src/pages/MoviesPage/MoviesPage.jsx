@@ -13,7 +13,6 @@ const MoviesPage = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [moviesList, setMoviesList] = useState([]);
 
-  console.log('!!!!!!!!!!!!!!!!!!!!!!!!');
   const [searchParams, setSearchParams] = useSearchParams();
   const query = searchParams.get('query') ?? '';
 

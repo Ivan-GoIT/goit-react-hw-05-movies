@@ -21,10 +21,12 @@ const MovieCard = () => {
 
   useEffect(() => {
     fetchData(QueryPath.movieDetails(movieId))
-    .then(({ data }) => {
-      setMovieObj(data);
-    })
-    .catch((err)=>{toast.error('OOPS. Something wrong')});
+      .then(({ data }) => {
+        setMovieObj(data);
+      })
+      .catch(err => {
+        toast.error('OOPS. Something wrong');
+      });
     return setMovieObj(null);
   }, [movieId]);
 
