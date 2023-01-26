@@ -2,7 +2,7 @@ import css from './MoviesList.module.css';
 import classNames from 'classnames';
 import { Link } from 'react-router-dom';
 
-export const MoviesList = ({ moviesList, title, location }) => {
+const MoviesList = ({ moviesList, title, location }) => {
   return (
     <div className={classNames(css.container, css.movies_list)}>
       <ul className={css.movies_list}>
@@ -17,3 +17,5 @@ export const MoviesList = ({ moviesList, title, location }) => {
     </div>
   );
 };
+
+export default MoviesList;

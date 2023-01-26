@@ -4,9 +4,9 @@ import { fetchData } from 'helpers';
 import css from './Reviews.module.css';
 import { useParams } from 'react-router-dom';
 
-export const Reviews = () => {
+const Reviews = () => {
   const [reviews, setReviews] = useState([]);
-  const{movieId}=useParams()
+  const { movieId } = useParams();
 
   useEffect(() => {
     fetchData(QueryPath.movieReviews(movieId)).then(({ data: { results } }) => {
@@ -15,12 +15,16 @@ export const Reviews = () => {
   }, [movieId]);
   return (
     <ul className={css.reviews_list}>
-      {!!reviews.length?reviews.map(({ author, content, id }) => (
-        <li className={css.reviews_list__item} key={id}>
-          <h3>Author: {author}</h3> 
-          <p>{content}</p>
-        </li>
-      )):`We don't have any reviews for this movie.`}
+      {!!reviews.length
+        ? reviews.map(({ author, content, id }) => (
+            <li className={css.reviews_list__item} key={id}>
+              <h3>Author: {author}</h3>
+              <p>{content}</p>
+            </li>
+          ))
+        : `We don't have any reviews for this movie.`}
     </ul>
   );
 };
+
+export default Reviews;

@@ -1,9 +1,9 @@
 import { useState } from 'react';
-import { Section } from 'components/Section/Section';
+import Section from 'components/Section/Section';
 import css from './SearchForm.module.css';
 import { toast } from 'react-toastify';
 
-export const SearhForm = ({ onSubmit }) => {
+const SearhForm = ({ onSubmit }) => {
   const [query, setQuery] = useState('');
 
   const onCangeInputHandler = evt => {
@@ -37,3 +37,5 @@ export const SearhForm = ({ onSubmit }) => {
     </Section>
   );
 };
+
+export default SearhForm;

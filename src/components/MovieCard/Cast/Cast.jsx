@@ -3,14 +3,8 @@ import QueryPath from 'constants/QueryPath';
 import { fetchData, imagePath } from 'helpers';
 import css from './Cast.module.css';
 import { useParams } from 'react-router-dom';
-// import defaultImg from '../../../../../assets/defaultImg'
 
-// const defaultImgPath = gender =>
-//   gender === 1
-//     ? defaultImg.femaleDefault
-//     : defaultImg.maleDefault;
-
-export const Cast = () => {
+ const Cast = () => {
   const [actorsArrey, setActorsArrey] = useState([]);
   const { movieId } = useParams();
 
@@ -31,3 +25,5 @@ export const Cast = () => {
     </ul>
   );
 };
+
+export default Cast;

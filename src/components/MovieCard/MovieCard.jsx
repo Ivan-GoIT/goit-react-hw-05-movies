@@ -1,5 +1,5 @@
-import { useState, useEffect } from 'react';
-import { Section } from 'components/Section/Section';
+import { useState, useEffect, Suspense } from 'react';
+import Section from 'components/Section/Section';
 import { fetchData, imagePath } from 'helpers';
 import {
   Link,
@@ -10,17 +10,21 @@ import {
 } from 'react-router-dom';
 import QueryPath from '../../constants/QueryPath';
 import css from './MovieCard.module.css';
+import Loader from 'components/Loader/Loader';
+import { toast } from 'react-toastify';
 
-export const MovieCard = () => {
+const MovieCard = () => {
   const [movieObj, setMovieObj] = useState(null);
   const { movieId } = useParams();
   const location = useLocation();
   const backLink = location.state?.from ?? '/';
 
   useEffect(() => {
-    fetchData(QueryPath.movieDetails(movieId)).then(({ data }) => {
+    fetchData(QueryPath.movieDetails(movieId))
+    .then(({ data }) => {
       setMovieObj(data);
-    });
+    })
+    .catch((err)=>{toast.error('OOPS. Something wrong')});
     return setMovieObj(null);
   }, [movieId]);
 
@@ -68,8 +72,12 @@ export const MovieCard = () => {
             </li>
           </ul>
         </div>
-        <Outlet />
+        <Suspense fallback={<Loader />}>
+          <Outlet />
+        </Suspense>
       </>
     </Section>
   );
 };
+
+export default MovieCard;

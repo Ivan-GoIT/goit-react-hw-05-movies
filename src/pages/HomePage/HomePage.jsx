@@ -1,11 +1,11 @@
 import { useState, useEffect, useRef } from 'react';
-import { MoviesList } from 'components/MoviesList/MoviesList';
-import { Section } from 'components/Section/Section';
+import MoviesList from 'components/MoviesList/MoviesList';
+import Section from 'components/Section/Section';
 import { fetchData, parseDataForMovieList } from 'helpers';
 import QueryPath from 'constants/QueryPath';
 import { useLocation } from 'react-router-dom';
 
- const HomePage = () => {
+const HomePage = () => {
   const [treadingList, setTreadingList] = useState([]);
   const firstHomeRender = useRef(true);
   const location = useLocation();
@@ -32,4 +32,4 @@ import { useLocation } from 'react-router-dom';
   );
 };
 
-export default HomePage
+export default HomePage;

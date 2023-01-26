@@ -1,11 +1,11 @@
 import { lazy, Suspense } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import { Header } from 'components/Header/Header';
-import { MovieCard } from 'components/MovieCard/MovieCard';
-import { Cast } from 'components/MovieCard/Cast/Cast';
-import { Reviews } from 'components/MovieCard/Reviews/Reviews';
+import Header from 'components/Header/Header';
+import MovieCard from 'components/MovieCard/MovieCard';
+import Cast from 'components/MovieCard/Cast/Cast';
+import Reviews from 'components/MovieCard/Reviews/Reviews';
 import { ToastContainer } from 'react-toastify';
-import { Loader } from 'components/Loader/Loader';
+import Loader from 'components/Loader/Loader';
 
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -33,12 +33,10 @@ export const App = () => {
             <Route path="/" element={<Header />}>
               <Route index element={<HomePage />} />
               <Route path="movies" element={<MoviesPage />} />
-              <Suspense fallback={<Loader />}>
                 <Route path="movies/:movieId" element={<MovieCard />}>
                   <Route path="cast" element={<Cast />} />
                   <Route path="reviews" element={<Reviews />} />
                 </Route>
-              </Suspense>
             </Route>
           </Routes>
         </Suspense>
