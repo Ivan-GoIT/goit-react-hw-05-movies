@@ -1,7 +1,7 @@
 import Loader from 'components/Loader/Loader';
-import MoviesList  from 'components/MoviesList/MoviesList';
-import SearhForm  from 'components/SearchForm/SearchForm';
-import Section  from 'components/Section/Section';
+import MoviesList from 'components/MoviesList/MoviesList';
+import SearhForm from 'components/SearchForm/SearchForm';
+import Section from 'components/Section/Section';
 import QueryPath from 'constants/QueryPath';
 import { fetchData } from 'helpers';
 import { useEffect } from 'react';
@@ -13,6 +13,7 @@ const MoviesPage = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [moviesList, setMoviesList] = useState([]);
 
+  console.log('!!!!!!!!!!!!!!!!!!!!!!!!');
   const [searchParams, setSearchParams] = useSearchParams();
   const query = searchParams.get('query') ?? '';
 
@@ -51,5 +52,4 @@ const MoviesPage = () => {
   );
 };
 
-
-export default MoviesPage
+export default MoviesPage;
