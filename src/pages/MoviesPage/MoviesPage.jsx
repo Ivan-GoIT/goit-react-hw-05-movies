@@ -9,7 +9,7 @@ import { useState } from 'react';
 import { useLocation, useSearchParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
-export const MoviesPage = () => {
+const MoviesPage = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [moviesList, setMoviesList] = useState([]);
 
@@ -50,3 +50,6 @@ export const MoviesPage = () => {
     </Section>
   );
 };
+
+
+export default MoviesPage

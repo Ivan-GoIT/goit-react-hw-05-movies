@@ -5,7 +5,7 @@ import { fetchData, parseDataForMovieList } from 'helpers';
 import QueryPath from 'constants/QueryPath';
 import { useLocation } from 'react-router-dom';
 
-export const HomePage = () => {
+ const HomePage = () => {
   const [treadingList, setTreadingList] = useState([]);
   const firstHomeRender = useRef(true);
   const location = useLocation();
@@ -31,3 +31,5 @@ export const HomePage = () => {
     </>
   );
 };
+
+export default HomePage

@@ -1,14 +1,16 @@
-import { Header } from 'components/Header/Header';
-import { HomePage } from 'pages/HomePage/HomePage';
+import { lazy, Suspense } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { Header } from 'components/Header/Header';
 import { MovieCard } from 'components/MovieCard/MovieCard';
-import { MoviesPage } from 'pages/MoviesPage/MoviesPage';
 import { Cast } from 'components/MovieCard/Cast/Cast';
 import { Reviews } from 'components/MovieCard/Reviews/Reviews';
 import { ToastContainer } from 'react-toastify';
 
-
 import 'react-toastify/dist/ReactToastify.css';
+
+const HomePage = lazy(() => import('pages/HomePage/HomePage'));
+const MoviesPage = lazy(() => import('components/MovieCard/MovieCard'));
+
 export const App = () => {
   return (
     <>
@@ -25,16 +27,18 @@ export const App = () => {
         theme="colored"
       />
       <BrowserRouter basename="/goit-react-hw-05-movies">
-        <Routes>
-          <Route path="/" element={<Header />}>
-            <Route index element={<HomePage />} />
-            <Route path="movies" element={<MoviesPage />} />
-            <Route path="movies/:movieId" element={<MovieCard />}>
-              <Route path="cast" element={<Cast />} />
-              <Route path="reviews" element={<Reviews />} />
+        <Suspense>
+          <Routes>
+            <Route path="/" element={<Header />}>
+              <Route index element={<HomePage />} />
+              <Route path="movies" element={<MoviesPage />} />
+              <Route path="movies/:movieId" element={<MovieCard />}>
+                <Route path="cast" element={<Cast />} />
+                <Route path="reviews" element={<Reviews />} />
+              </Route>
             </Route>
-          </Route>
-        </Routes>
+          </Routes>
+        </Suspense>
       </BrowserRouter>
     </>
   );
