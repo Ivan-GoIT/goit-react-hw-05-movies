@@ -1,4 +1,4 @@
-import {useState,useEffect,useRef} from 'react'
+import { useState, useEffect, useRef } from 'react';
 import { MoviesList } from 'components/MoviesList/MoviesList';
 import { Section } from 'components/Section/Section';
 import { fetchData, parseDataForMovieList } from 'helpers';
@@ -8,13 +8,12 @@ import { useLocation } from 'react-router-dom';
 export const HomePage = () => {
   const [treadingList, setTreadingList] = useState([]);
   const firstHomeRender = useRef(true);
-  const location=useLocation();
-console.log('location',location);
+  const location = useLocation();
 
   useEffect(() => {
     if (firstHomeRender.current) {
       fetchData(QueryPath.trending).then(({ data: { results } }) => {
-        const treadingData = parseDataForMovieList(results)
+        const treadingData = parseDataForMovieList(results);
         setTreadingList(treadingData);
       });
 

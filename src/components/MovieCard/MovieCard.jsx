@@ -17,9 +17,6 @@ export const MovieCard = () => {
   const location = useLocation();
   const backLink = location.state?.from ?? '/';
 
-  console.log('MovieCard location', location);
-  console.log('MovieCard backLink', backLink);
-
   useEffect(() => {
     fetchData(QueryPath.movieDetails(movieId)).then(({ data }) => {
       setMovieObj(data);
@@ -35,7 +32,6 @@ export const MovieCard = () => {
     <Section>
       <>
         <NavLink className={css.goBackButton} to={backLink}>
-          {' '}
           Go back
         </NavLink>
         <div className={css.movie_card}>
@@ -61,12 +57,12 @@ export const MovieCard = () => {
           <h4>Additional information</h4>
           <ul className="info_list">
             <li className="info_list__item">
-              <Link to={`cast`} state={{ from: location }}>
+              <Link to={`cast`} state={{ from: backLink }}>
                 Cast
               </Link>
             </li>
             <li className="info_list__item">
-              <Link to={`reviews`} state={{ from: location }}>
+              <Link to={`reviews`} state={{ from: backLink }}>
                 Reviews
               </Link>
             </li>
