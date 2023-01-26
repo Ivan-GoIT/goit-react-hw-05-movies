@@ -5,6 +5,7 @@ import { MovieCard } from 'components/MovieCard/MovieCard';
 import { Cast } from 'components/MovieCard/Cast/Cast';
 import { Reviews } from 'components/MovieCard/Reviews/Reviews';
 import { ToastContainer } from 'react-toastify';
+import { Loader } from 'components/Loader/Loader';
 
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -27,7 +28,7 @@ export const App = () => {
         theme="colored"
       />
       <BrowserRouter basename="/goit-react-hw-05-movies">
-        <Suspense>
+        <Suspense fallback={<Loader/>}>
           <Routes>
             <Route path="/" element={<Header />}>
               <Route index element={<HomePage />} />
