@@ -28,15 +28,17 @@ export const App = () => {
         theme="colored"
       />
       <BrowserRouter basename="/goit-react-hw-05-movies">
-        <Suspense fallback={<Loader/>}>
+        <Suspense fallback={<Loader />}>
           <Routes>
             <Route path="/" element={<Header />}>
               <Route index element={<HomePage />} />
               <Route path="movies" element={<MoviesPage />} />
-              <Route path="movies/:movieId" element={<MovieCard />}>
-                <Route path="cast" element={<Cast />} />
-                <Route path="reviews" element={<Reviews />} />
-              </Route>
+              <Suspense fallback={<Loader />}>
+                <Route path="movies/:movieId" element={<MovieCard />}>
+                  <Route path="cast" element={<Cast />} />
+                  <Route path="reviews" element={<Reviews />} />
+                </Route>
+              </Suspense>
             </Route>
           </Routes>
         </Suspense>
