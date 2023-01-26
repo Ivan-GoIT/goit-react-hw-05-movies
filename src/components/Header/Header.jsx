@@ -1,4 +1,4 @@
-import classNames from 'classname';
+import classNames from 'classnames';
 import css from './Header.module.css';
 import styled from 'styled-components';
 import { NavLink, Outlet } from 'react-router-dom';
